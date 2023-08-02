@@ -2,26 +2,21 @@ const inquire = require("inquirer");
 const express = require("express");
 const mysql = require("mysql2");
 const cTable = require("console.table");
+const menu = require("./app/questions/menu");
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
 app.use(express.urlencoded({ extended: false }));
 
-const connection = mysql.createConnection({
-    host: "localhost",
-    port: 3306,
-    database: "corporate",
-    user: "root",
-    password: "password",
-});
-
-connection.connect((err) => {
-    if (err) throw err;
-    console.log("Connected as id " + connection.threadId);
-    start();
-});
+const connection = mysql.createConnection(dbConfigCRUD);
 
 
+const init = () => {
+    inquire.prompt(menu).then((answers) => { });
+
+ };
+
+init();
  
 
