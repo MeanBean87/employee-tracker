@@ -1,5 +1,7 @@
 const mysql = require("mysql2");
 const { seedDepartments, seedRoles, seedEmployees } = require("./seeds");
+const dbConfig = require("../config/dbConfig.js");
+
 
 const createDepartmentsTable = () => {
   return `CREATE TABLE departments (id INT NOT NULL AUTO_INCREMENT, name VARCHAR(30) NOT NULL, PRIMARY KEY (id));`;
@@ -23,12 +25,6 @@ const createEmployeeTable = () => {
 };
 
 const buildAndSeedDatabase = async () => {
-  const dbConfig = {
-    host: "localhost",
-    port: 3306,
-    user: "root",
-    password: "password",
-  };
 
   const pool = mysql
     .createConnection(dbConfig, { multipleStatements: true })
