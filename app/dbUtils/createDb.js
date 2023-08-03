@@ -1,6 +1,6 @@
 const mysql = require("mysql2");
 const { seedDepartments, seedRoles, seedEmployees } = require("./seeds");
-const dbConfig = require("../config/dbConfig.js");
+const { dbConfig } = require("../config/dbConfig.js");
 
 
 const createDepartmentsTable = () => {

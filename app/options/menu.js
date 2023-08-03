@@ -1,6 +1,6 @@
 menu = [
     {
-        type: "menu",
+        type: "list",
         name: "menu",
         message: "What would you like to do?",
         choices: [
@@ -15,3 +15,5 @@ menu = [
         ]
     }
 ];
+
+module.exports = menu;

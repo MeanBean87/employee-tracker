@@ -13,4 +13,4 @@ const dbConfigCRUD = {
     database: "corporate"
 };
   
-module.exports = dbConfig;
+module.exports = {dbConfig, dbConfigCRUD} ;
