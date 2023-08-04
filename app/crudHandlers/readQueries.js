@@ -1,14 +1,19 @@
-const consoleTable = require("console.table");
-
+const cliTable = require("cli-table3");
 const pool = require("../dbUtils/connectDb");
+
+const showTable = (columnArr, tableData) => {
+  const table = new cliTable({ head: columnArr });
+  table.push(...tableData.map((row) => Object.values(row)));
+  console.log(table.toString());
+};
 
 const viewAllDepartments = async () => {
   try {
-    const [departments] = await pool.query("SELECT * FROM departments");
+    const [departments] = await pool.query(
+      "SELECT * FROM departments ORDER by id"
+    );
     process.stdout.write("\x1B[2J\x1B[0f");
-    const table = consoleTable.getTable(departments);
-    console.log(table);
-    console.log("\nPress Up/Down Arrow to return to main menu");
+    showTable(["Department ID", "Department Name"], departments);
   } catch (err) {
     console.error("Error occurred while fetching departments:", err);
   }
@@ -16,11 +21,9 @@ const viewAllDepartments = async () => {
 
 const viewAllRoles = async () => {
   try {
-    const [roles] = await pool.query("SELECT * FROM roles");
+    const [roles] = await pool.query("SELECT * FROM roles ORDER by id");
     process.stdout.write("\x1B[2J\x1B[0f");
-    const table = consoleTable.getTable(roles);
-    console.log(table);
-    console.log("\nPress Up/Down Arrow to return to main menu");
+    showTable(["Role ID", "Role Title", "Salary", "Department ID"], roles);
   } catch (err) {
     console.error("Error occurred while fetching roles:", err);
   }
@@ -28,10 +31,12 @@ const viewAllRoles = async () => {
 
 const viewAllEmployees = async () => {
   try {
-    const [employees] = await pool.query("SELECT * FROM employees");
+    const [employees] = await pool.query("SELECT * FROM employees ORDER by id");
     process.stdout.write("\x1B[2J\x1B[0f");
-    const table = consoleTable.getTable(employees);
-    console.log(table);
+    showTable(
+      ["Employee ID", "First Name", "Last Name", "Role ID", "Manager ID"],
+      employees
+    );
   } catch (err) {
     console.error("Error occurred while fetching employees:", err);
   }
@@ -53,8 +58,17 @@ const viewEmployeesByManager = async () => {
     `;
     const [employeesByManager] = await pool.query(query);
     process.stdout.write("\x1B[2J\x1B[0f");
-    const table = consoleTable.getTable(employeesByManager);
-    console.log(table);
+    showTable(
+      [
+        "Employee ID",
+        "First Name",
+        "Last Name",
+        "Manager ID",
+        "Manager Name",
+        "Role",
+      ],
+      employeesByManager
+    );
   } catch (err) {
     console.error("Error occurred while fetching employees:", err);
   }
@@ -78,8 +92,18 @@ const viewEmployeesByDepartment = async () => {
 
     const [employeesByDepartment] = await pool.query(query);
     process.stdout.write("\x1B[2J\x1B[0f");
-    const table = consoleTable.getTable(employeesByDepartment);
-    console.log(table);
+    showTable(
+      [
+        "Employee ID",
+        "First Name",
+        "Last Name",
+        "Department",
+        "Role",
+        "Salary",
+        "Manager Name",
+      ],
+      employeesByDepartment
+    );
   } catch (err) {
     console.error("Error occurred while fetching employees:", err);
   }
@@ -93,12 +117,15 @@ const generateLaborCostReport = async () => {
     FROM departments d
     LEFT JOIN roles r ON d.id = r.department_id
     LEFT JOIN employees e ON r.id = e.role_id
-    GROUP BY d.id, d.name;`;
+    GROUP BY d.id, d.name
+    ORDER BY d.id ASC;`;
 
     const [laborCostReport] = await pool.query(query);
     process.stdout.write("\x1B[2J\x1B[0f");
-    const table = consoleTable.getTable(laborCostReport);
-    console.log(table);
+    showTable(
+      ["Department ID", "Department Name", "Labor Cost"],
+      laborCostReport
+    );
   } catch (err) {
     console.error("Error occurred while fetching employees:", err);
   }

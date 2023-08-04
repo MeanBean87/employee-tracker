@@ -86,7 +86,7 @@ const deleteRoles = async () => {
     );
 
     await pool.query(
-      `DELETE FROM roles WHERE id = ?`,
+      `DELETE FROM role WHERE id = ?`,
       [selectedRole.id]);
     
     console.log(`Role ${answers.role} has been deleted.`);
@@ -99,7 +99,7 @@ const deleteRoles = async () => {
 const deleteEmployees = async () => {
   try {
     const employeesArray = [];
-    const [employees] = await pool.query("SELECT * FROM employees ");
+    const [employees] = await pool.query("SELECT * FROM employees");
 
     employees.forEach((employee) => {
       employeesArray.push({ name: `${employee.first_name} ${employee.last_name}`, id: employee.id });

@@ -102,7 +102,7 @@ const showMenu = async () => {
         break;
       case "Exit":
         try {
-          process.stdout.write("\x1Bc");
+          process.stdout.write("\x1B[2J\x1B[0f");
           await pool.end();
           console.log("Goodbye!");
           process.exit();
@@ -140,25 +140,25 @@ const promptUser = async () => {
 
 const init = async () => {
   process.stdout.write("\x1B[2J\x1B[0f");
-  console.log(
+  console.log("\x1b[33m",
     "                                                                                                                                                "
   );
-  console.log(
+  console.log("\x1b[33m",
     "███████ ███    ███ ██████  ██       ██████  ██    ██ ███████ ███████      █████  ███    ██  █████  ██      ██    ██ ███████ ███████ ██████      "
   );
-  console.log(
+  console.log("\x1b[33m",
     "██      ████  ████ ██   ██ ██      ██    ██  ██  ██  ██      ██          ██   ██ ████   ██ ██   ██ ██       ██  ██  ██      ██      ██   ██     "
   );
-  console.log(
+  console.log("\x1b[33m",
     "█████   ██ ████ ██ ██████  ██      ██    ██   ████   █████   █████       ███████ ██ ██  ██ ███████ ██        ████   ███████ █████   ██████      "
   );
-  console.log(
+  console.log("\x1b[33m",
     "██      ██  ██  ██ ██      ██      ██    ██    ██    ██      ██          ██   ██ ██  ██ ██ ██   ██ ██         ██         ██ ██      ██   ██     "
   );
-  console.log(
+  console.log("\x1b[33m",
     "███████ ██      ██ ██      ███████  ██████     ██    ███████ ███████     ██   ██ ██   ████ ██   ██ ███████    ██    ███████ ███████ ██   ██     "
   );
-  console.log(
+  console.log("\x1b[33m",
     "                                                                                                                                                "
   );
   showMenu();

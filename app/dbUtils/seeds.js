@@ -33,24 +33,24 @@ const seedRoles = async (pool) => {
     { title: "Sales Associate", salary: 55000, department_id: 1 },
 
     // Marketing department
-    { title: "Marketing Manager", salary: 85000, department_id: 3 }, // Manager role for Marketing department
-    { title: "Marketing Specialist", salary: 70000, department_id: 3 },
-    { title: "Digital Marketing Coordinator", salary: 65000, department_id: 3 },
+    { title: "Marketing Manager", salary: 85000, department_id: 6 }, // Manager role for Marketing department
+    { title: "Marketing Specialist", salary: 70000, department_id: 6 },
+    { title: "Digital Marketing Coordinator", salary: 65000, department_id: 6 },
 
     // Finance department
-    { title: "Finance Manager", salary: 95000, department_id: 4 }, // Manager role for Finance department
-    { title: "Financial Analyst", salary: 85000, department_id: 4 },
-    { title: "Accountant", salary: 75000, department_id: 4 },
+    { title: "Finance Manager", salary: 95000, department_id: 3 }, // Manager role for Finance department
+    { title: "Financial Analyst", salary: 85000, department_id: 3 },
+    { title: "Accountant", salary: 75000, department_id: 3 },
 
     // Legal department
-    { title: "Legal Manager", salary: 92000, department_id: 5 }, // Manager role for Legal department
-    { title: "Legal Consultant", salary: 80000, department_id: 5 },
-    { title: "Paralegal", salary: 70000, department_id: 5 },
+    { title: "Legal Manager", salary: 92000, department_id: 4 }, // Manager role for Legal department
+    { title: "Legal Consultant", salary: 80000, department_id: 4 },
+    { title: "Paralegal", salary: 70000, department_id: 4 },
 
     // Human Resources department
-    { title: "HR Manager", salary: 90000, department_id: 6 }, // Manager role for Human Resources department
-    { title: "HR Specialist", salary: 75000, department_id: 6 },
-    { title: "Recruiter", salary: 70000, department_id: 6 },
+    { title: "HR Manager", salary: 90000, department_id: 5 }, // Manager role for Human Resources department
+    { title: "HR Specialist", salary: 75000, department_id: 5 },
+    { title: "Recruiter", salary: 70000, department_id: 5 },
 
     // Customer Service department
     { title: "Customer Service Manager", salary: 80000, department_id: 7 }, // Manager role for Customer Service department
@@ -86,184 +86,209 @@ const seedEmployees = async (pool) => {
   const employeesData = [
     // Engineering department
     {
+      //1
       first_name: faker.person.firstName(),
       last_name: faker.person.lastName(),
       role_id: 1,
       manager_id: null,
     },
     {
+      //2
       first_name: faker.person.firstName(),
       last_name: faker.person.lastName(),
       role_id: 2,
       manager_id: 1,
     },
     {
+      //3
       first_name: faker.person.firstName(),
       last_name: faker.person.lastName(),
       role_id: 2,
       manager_id: 1,
     },
     {
+      //4
       first_name: faker.person.firstName(),
       last_name: faker.person.lastName(),
       role_id: 2,
       manager_id: 1,
     },
     {
+      //5
       first_name: faker.person.firstName(),
       last_name: faker.person.lastName(),
       role_id: 3,
       manager_id: 1,
     },
     {
+      //6
       first_name: faker.person.firstName(),
       last_name: faker.person.lastName(),
       role_id: 3,
       manager_id: 1,
     },
-
-    // Sales department
     {
+      //7
       first_name: faker.person.firstName(),
       last_name: faker.person.lastName(),
       role_id: 4,
+      manager_id: 1,
+    },
+    // Sales department
+    {
+      //8
+      first_name: faker.person.firstName(),
+      last_name: faker.person.lastName(),
+      role_id: 5,
       manager_id: null,
     },
     {
-      first_name: faker.person.firstName(),
-      last_name: faker.person.lastName(),
-      role_id: 5,
-      manager_id: 2,
-    },
-    {
-      first_name: faker.person.firstName(),
-      last_name: faker.person.lastName(),
-      role_id: 5,
-      manager_id: 2,
-    },
-    {
+      //9
       first_name: faker.person.firstName(),
       last_name: faker.person.lastName(),
       role_id: 6,
-      manager_id: 2,
+      manager_id: 8,
+    },
+    {
+      //10
+      first_name: faker.person.firstName(),
+      last_name: faker.person.lastName(),
+      role_id: 6,
+      manager_id: 8,
     },
 
-    // Marketing department
     {
+      //11
       first_name: faker.person.firstName(),
       last_name: faker.person.lastName(),
       role_id: 7,
+      manager_id: 8,
+    },
+    // Marketing department
+    {
+      //12
+      first_name: faker.person.firstName(),
+      last_name: faker.person.lastName(),
+      role_id: 8,
       manager_id: null,
     },
     {
-      first_name: faker.person.firstName(),
-      last_name: faker.person.lastName(),
-      role_id: 8,
-      manager_id: 3,
-    },
-    {
-      first_name: faker.person.firstName(),
-      last_name: faker.person.lastName(),
-      role_id: 8,
-      manager_id: 3,
-    },
-
-    // Finance department
-    {
+      //13
       first_name: faker.person.firstName(),
       last_name: faker.person.lastName(),
       role_id: 9,
-      manager_id: null,
+      manager_id: 12,
     },
     {
+      //14
+      first_name: faker.person.firstName(),
+      last_name: faker.person.lastName(),
+      role_id: 9,
+      manager_id: 12,
+    },
+    {
+      //15
       first_name: faker.person.firstName(),
       last_name: faker.person.lastName(),
       role_id: 10,
-      manager_id: 4,
+      manager_id: 12,
     },
+    // Finance department
 
     // Legal department
     {
+      //16
       first_name: faker.person.firstName(),
       last_name: faker.person.lastName(),
       role_id: 11,
       manager_id: null,
     },
     {
+      //17
       first_name: faker.person.firstName(),
       last_name: faker.person.lastName(),
       role_id: 12,
-      manager_id: 5,
+      manager_id: 16,
     },
 
     // Human Resources department
     {
+      //18
       first_name: faker.person.firstName(),
       last_name: faker.person.lastName(),
       role_id: 13,
-      manager_id: null,
+      manager_id: 16,
     },
     {
+      //19
       first_name: faker.person.firstName(),
       last_name: faker.person.lastName(),
       role_id: 14,
-      manager_id: 6,
+      manager_id: null,
     },
 
     // Customer Service department
     {
+      //20
       first_name: faker.person.firstName(),
       last_name: faker.person.lastName(),
       role_id: 15,
-      manager_id: null,
+      manager_id: 19,
     },
     {
+      //21
       first_name: faker.person.firstName(),
       last_name: faker.person.lastName(),
       role_id: 16,
-      manager_id: 7,
+      manager_id: 19,
     },
 
     // Research and Development department
     {
+      //22
       first_name: faker.person.firstName(),
       last_name: faker.person.lastName(),
       role_id: 17,
       manager_id: null,
     },
     {
+      //23
       first_name: faker.person.firstName(),
       last_name: faker.person.lastName(),
       role_id: 18,
-      manager_id: 8,
+      manager_id: 22,
     },
 
     // Purchasing department
     {
+      //24
       first_name: faker.person.firstName(),
       last_name: faker.person.lastName(),
       role_id: 19,
-      manager_id: null,
+      manager_id: 22,
     },
     {
+      //25
       first_name: faker.person.firstName(),
       last_name: faker.person.lastName(),
       role_id: 20,
-      manager_id: 9,
+      manager_id: null,
     },
 
     // Information Technology department
     {
+      //26
       first_name: faker.person.firstName(),
       last_name: faker.person.lastName(),
       role_id: 21,
-      manager_id: null,
+      manager_id: 25,
     },
     {
+      //27
       first_name: faker.person.firstName(),
       last_name: faker.person.lastName(),
       role_id: 22,
-      manager_id: 10,
+      manager_id: 25,
     },
   ];
 
