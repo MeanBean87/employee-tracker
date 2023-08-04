@@ -74,6 +74,7 @@ const deleteRoles = async () => {
         type: "list",
         name: "role",
         loop: false,
+        pageSize: 15,
         message:
           "Only empty roles can be deleted.\nWhich role would you like to delete?",
         choices: validRolesArray.map((role) => role.name),
@@ -111,6 +112,7 @@ const deleteEmployees = async () => {
         name: "employee",
         message: "Which employee would you like to delete?",
         loop: false,
+        pageSize: 15,
         choices: employeesArray.map((employee) => employee.name),
       },
     ];
