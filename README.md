@@ -4,6 +4,8 @@
 
 This is a simple CLI based content management system that performs CRUD operations on a dynamically generated test database. This application uses, Node.js, Inquirer.js, CLI-Table3, Faker.js, MySQL, and the MySQL2  node module. This application will generate and seed the database dynamically when running "NPM Install" from the command-line.
 
+Installation instruction video and demo: [Link to video.](https://drive.google.com/file/d/1CNvxe2JovI9bKZp8QBNIzs20p3YDzNGu/view?usp=sharing)
+
 Node can be installed directly from [https://nodejs.org/en](https://nodejs.org/en).
 
 MySQL can be installed directly from [https://www.mysql.com/downloads/](https://www.mysql.com/downloads/)
@@ -47,17 +49,19 @@ Link to Node.js Downloads: [https://nodejs.org/en](https://nodejs.org/en)
 
 ## Usage
 
+Installation video: [https://drive.google.com/file/d/1CNvxe2JovI9bKZp8QBNIzs20p3YDzNGu/view?usp=sharing](https://drive.google.com/file/d/1CNvxe2JovI9bKZp8QBNIzs20p3YDzNGu/view?usp=sharing)
+
 1. Clone the repository from "git@github.com:MeanBean87/employee-tracker.git"
-2. Navigate to the root directory of the application
-3. Open folder "config" then edit dbConfig.js update these userName and password variables to use your username and password for MySQL, note the users that will be using this application will need to have the appropriate permissings.
+3. Navigate to the root directory of the application
+4. Open folder "config" then edit dbConfig.js update these userName and password variables to use your username and password for MySQL, note the users that will be using this application will need to have the appropriate permissings.
 
    ![1691161879250](image/README/1691161879250.png)
-4. Run "npm install" from the command-line.
-5. Start the application with "node server.js" or "npm start" from the command-line while in the root directory.
-6. Navigate the menu to perform CRUD operations on the MySQL database.
-7. For create, update, or delete operations follow the prompts. When using read operations you will be presented with a table of the desired information.
-8. You will then be given an option to return to the main menu or exit the application.
-9. Return to the main menu to perform more actions, select exit to close the connection to MySQL and exit the application.
+5. Run "npm install" from the command-line.
+6. Start the application with "node server.js" or "npm start" from the command-line while in the root directory.
+7. Navigate the menu to perform CRUD operations on the MySQL database.
+8. For create, update, or delete operations follow the prompts. When using read operations you will be presented with a table of the desired information.
+9. You will then be given an option to return to the main menu or exit the application.
+10. Return to the main menu to perform more actions, select exit to close the connection to MySQL and exit the application.
 
 ## Code Highlights
 
