@@ -1,26 +1,25 @@
 const inquirer = require("inquirer");
 const pool = require("../dbUtils/connectDb");
-const consoleTable = require("console.table");
 
 const addDepartment = async () => {
-  const questions = [
-    {
-      type: "input",
-      name: "name",
-      message: "What is the department's name?",
-    },
-  ];
+  try {
+    const questions = [
+      {
+        type: "input",
+        name: "name",
+        message: "What is the department's name?",
+      },
+    ];
 
-  const answers = await inquirer.prompt(questions);
+    const answers = await inquirer.prompt(questions);
 
-  pool.query(
-    "INSERT INTO departments (name) VALUES (?)",
-    [answers.name],
-    (err, res) => {
-      if (err) throw err;
-      console.log("Successfully added department!");
-    }
-  );
+    await pool.query("INSERT INTO departments (name) VALUES (?)", [
+      answers.name,
+    ]);
+    console.log("Successfully added department!");
+  } catch (err) {
+    console.error("Error occurred while fetching departments:", err);
+  }
 };
 
 const addRole = async () => {
@@ -47,6 +46,7 @@ const addRole = async () => {
         type: "list",
         name: "departmentName",
         message: "What is the role's department?",
+        loop: false,
         choices: departmentsArray.map((department) => department.name),
       },
     ];
@@ -71,14 +71,26 @@ const addRole = async () => {
   }
 };
 
-const addNewEmployee = () => {
-  pool.query("SELECT id from roles", (err, res) => {
-    if (err) {
-      console.error("Error occurred while fetching roles:", err);
-      return;
-    }
+const addNewEmployee = async () => {
+  try {
+    const rolesArray = [];
+    const [roles] = await pool.query("SELECT * FROM roles");
 
-    const roles = res.map((role) => role.id);
+    roles.forEach((role) => {
+      rolesArray.push({ name: role.title, id: role.id });
+    });
+
+    const managersArray = [];
+    const [managers] = await pool.query(
+      "SELECT * FROM employees WHERE manager_id IS NULL"
+    );
+
+    managers.forEach((employee) => {
+      managersArray.push({
+        name: `${employee.first_name} ${employee.last_name}`,
+        id: employee.id,
+      });
+    });
 
     const questions = [
       {
@@ -95,18 +107,37 @@ const addNewEmployee = () => {
         type: "list",
         name: "role_id",
         message: "What is the employee's role?",
-        choices: roles,
+        loop: false,
+        choices: rolesArray.map((role) => role.name),
+      },
+      {
+        type: "list",
+        name: "manager_id",
+        message: "Who is the employees manager?",
+        loop: false,
+        choices: managersArray.map((manager) => manager.name),
       },
     ];
 
-    inquirer.prompt(questions).then((answers) => {
-      pool.query("INSERT INTO employees SET ?", answers, (err, res) => {
-        if (err) throw err;
-        console.log("Successfully added employee!");
-        returnPrompt;
-      });
+    const answers = await inquirer.prompt(questions);
+    const selectedRole = rolesArray.find(
+      (role) => role.name === answers.role_id
+    );
+
+    const selectedManager = managersArray.find(
+      (manager) => manager.name === answers.manager_id
+    );
+
+    await pool.query("INSERT INTO employees SET ?", {
+      first_name: answers.first_name,
+      last_name: answers.last_name,
+      role_id: selectedRole.id,
+      manager_id: selectedManager.id,
     });
-  });
+    console.log("Successfully added new employee!");
+  } catch (err) {
+    console.error("Error occurred while adding the employee:", err);
+  }
 };
 
 module.exports = { addDepartment, addRole, addNewEmployee };

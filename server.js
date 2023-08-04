@@ -1,6 +1,5 @@
 const inquirer = require("inquirer");
 const pool = require("./app/dbUtils/connectDb");
-
 const {
   viewAllDepartments,
   viewAllRoles,
@@ -12,7 +11,7 @@ const {
 const {
   addDepartment,
   addRole,
-  addEmployee,
+  addNewEmployee,
 } = require("./app/crudHandlers/createQueries");
 
 const showMenu = async () => {
@@ -21,6 +20,7 @@ const showMenu = async () => {
       type: "list",
       name: "menu",
       message: "What would you like to do?",
+      loop: false,
       choices: [
         "View All Departments",
         "View All Roles",
@@ -66,7 +66,7 @@ const showMenu = async () => {
         await addRole();
         break;
       case "Add Employee":
-        await addEmployee();
+        await addNewEmployee();
         break;
       case "Update Employee Role":
         await updateEmployee();
