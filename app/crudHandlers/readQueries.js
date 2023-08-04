@@ -89,7 +89,7 @@ const generateLaborCostReport = async () => {
   try {
     const query = `SELECT d.id AS department_id,
     d.name AS department_name,
-    SUM(r.salary) AS labor_cost
+    SUM(COALESCE(r.salary, 0)) AS labor_cost
     FROM departments d
     LEFT JOIN roles r ON d.id = r.department_id
     LEFT JOIN employees e ON r.id = e.role_id

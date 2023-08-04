@@ -1,5 +1,6 @@
 const inquirer = require("inquirer");
 const pool = require("./app/dbUtils/connectDb");
+
 const {
   viewAllDepartments,
   viewAllRoles,
@@ -8,6 +9,7 @@ const {
   viewEmployeesByDepartment,
   generateLaborCostReport,
 } = require("./app/crudHandlers/readQueries");
+
 const {
   addDepartment,
   addRole,
@@ -18,6 +20,13 @@ const {
   updateEmpRole,
   updateEmpManager,
 } = require("./app/crudHandlers/updateQueries");
+
+const {
+  deleteDepartments,
+  deleteRoles,
+  deleteEmployees,
+} = require("./app/crudHandlers/deleteQueries");
+
 
 const showMenu = async () => {
   const menu = [
@@ -40,7 +49,7 @@ const showMenu = async () => {
         "Delete Department",
         "Delete Role",
         "Delete Employee",
-        "Show labor cost by deparment",
+        "Show labor cost by department",
         "Exit",
       ],
     },
@@ -80,15 +89,15 @@ const showMenu = async () => {
         await updateEmpManager();
         break;
       case "Delete Department":
-        await deleteDepartment();
+        await deleteDepartments();
         break;
       case "Delete Role":
-        await deleteRole();
+        await deleteRoles();
         break;
       case "Delete Employee":
-        await deleteEmployee();
+        await deleteEmployees();
         break;
-      case "Show labor cost by deparment":
+      case "Show labor cost by department":
         await generateLaborCostReport();
         break;
       case "Exit":
