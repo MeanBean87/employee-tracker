@@ -86,7 +86,7 @@ const deleteRoles = async () => {
     );
 
     await pool.query(
-      `DELETE FROM role WHERE id = ?`,
+      `DELETE FROM roles WHERE id = ?`,
       [selectedRole.id]);
     
     console.log(`Role ${answers.role} has been deleted.`);
