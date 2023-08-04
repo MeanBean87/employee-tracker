@@ -23,6 +23,7 @@ const updateEmpRole = async () => {
         name: "employee",
         message: "Which employee would you like to update?",
         loop: false,
+        pageSize: 15,
         choices: employeesArray.map((employee) => employee.name),
       },
       {
@@ -30,6 +31,7 @@ const updateEmpRole = async () => {
         name: "role",
         message: "What is the employee's new role?",
         loop: false,
+        pageSize: 15,
         choices: rolesArray.map((role) => role.name),
       },
     ];
@@ -74,6 +76,7 @@ const updateEmpManager = async () => {
         name: "employee",
         message: "Which employee would you like to update?",
         loop: false,
+        pageSize: 15,
         choices: employeesArray.map((employee) => employee.name),
       },
       {
@@ -81,6 +84,7 @@ const updateEmpManager = async () => {
         name: "manager",
         message: "Who is the employee's new manager?",
         loop: false,
+        pageSize: 15,
         choices: managersArray.map((manager) => manager.name),
       },
     ];

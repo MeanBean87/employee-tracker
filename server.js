@@ -35,6 +35,7 @@ const showMenu = async () => {
       name: "menu",
       message: "What would you like to do?",
       loop: false,
+      pageSize: 15,
       choices: [
         "View All Departments",
         "View All Roles",
