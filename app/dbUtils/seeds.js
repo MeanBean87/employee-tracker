@@ -77,7 +77,7 @@ const seedRoles = async (pool) => {
     { title: "Network Administrator", salary: 75000, department_id: 10 },
   ];
 
-  await pool.query(`INSERT INTO role (title, salary, department_id) VALUES ?`, [
+  await pool.query(`INSERT INTO roles (title, salary, department_id) VALUES ?`, [
     rolesData.map((role) => [role.title, role.salary, role.department_id]),
   ]);
 };
