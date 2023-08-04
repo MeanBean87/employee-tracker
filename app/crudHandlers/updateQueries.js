@@ -1,105 +1,106 @@
 const inquirer = require("inquirer");
-const returnPrompt = require("./returnFunction");
+const pool = require("../dbUtils/connectDb");
 
-
-const updateEmpRole = () => {
-  pool.query("SELECT * from employees", (err, res) => {
-    if (err) {
-      console.error("Error occurred while fetching employees:", err);
-      return;
-    }
-
-    const employees = res.map((employee) => ({
-      id: employee.id,
-      name: `${employee.first_name} ${employee.last_name}`,
-    }));
-
-    pool.query("SELECT * from roles", (err, res) => {
-      if (err) {
-        console.error("Error occurred while fetching roles:", err);
-        return;
-      }
-
-      const roles = res.map((role) => ({
-        id: role.id,
-        name: role.title,
-      }));
-
-      const questions = [
-        {
-          type: "list",
-          name: "employee",
-          message: "Select the employee you would like to update: ",
-          choices: employees,
-        },
-        {
-          type: "list",
-          name: "role",
-          message: "Select the employee's new role: ",
-          choices: roles,
-        },
-      ];
-
-      inquirer.prompt(questions).then((answers) => {
-        const selectedEmployee = answers.employee.id;
-        const selectedRole = answers.role.id;
-
-        pool.query(
-          "UPDATE employees SET role_id = ? WHERE id = ?",
-          [selectedRole, selectedEmployee],
-          (err, res) => {
-            if (err) throw err;
-            console.log("Successfully updated employee!");
-            returnPrompt();
-          }
-        );
-      });
+const updateEmpRole = async () => {
+  try {
+    const employeesArray = [];
+    const [employees] = await pool.query("SELECT * FROM employees");
+    
+    employees.forEach((employee) => {
+      employeesArray.push({ name: `${employee.first_name} ${employee.last_name}`, id: employee.id });
     });
-  });
-};
 
-const updateEmpManager = () => {
-  pool.query("SELECT * from employees", (err, res) => {
-    if (err) {
-      console.error("Error occurred while fetching employees:", err);
-      return;
-    }
+    const rolesArray = [];
+    const [roles] = await pool.query("SELECT * FROM roles");
 
-    const employees = res.map((employee) => ({
-      id: employee.id,
-      name: `${employee.first_name} ${employee.last_name}`,
-    }));
+    roles.forEach((role) => {
+      rolesArray.push({ name: role.title, id: role.id });
+    });
 
     const questions = [
       {
         type: "list",
         name: "employee",
-        message: "Select the employee you would like to update: ",
-        choices: employees,
+        message: "Which employee would you like to update?",
+        loop: false,
+        choices: employeesArray.map((employee) => employee.name),
+      },
+      {
+        type: "list",
+        name: "role",
+        message: "What is the employee's new role?",
+        loop: false,
+        choices: rolesArray.map((role) => role.name),
+      },
+    ];
+
+    const answers = await inquirer.prompt(questions);
+    const selectedEmployee = employeesArray.find(
+      (employee) => employee.name === answers.employee
+    );
+
+    const selectedRole = rolesArray.find(
+      (role) => role.name === answers.role
+    );
+
+    await pool.query(
+      "UPDATE employees SET role_id = ? WHERE id = ?",
+      [selectedRole.id, selectedEmployee.id]);
+    console.log("Successfully updated employee!");
+  } catch (err) {
+    console.error("Error occurred while updating the employee:", err);
+  }
+};
+
+const updateEmpManager = async () => {
+  try {
+    const employeesArray = [];
+    const [employees] = await pool.query("SELECT * FROM employees");
+
+    employees.forEach((employee) => {
+      employeesArray.push({ name: `${employee.first_name} ${employee.last_name}`, id: employee.id });
+    });
+
+    const managersArray = [];
+    const [managers] = await pool.query("SELECT * FROM employees WHERE manager_id IS NULL");
+
+    managers.forEach((employee) => {
+      managersArray.push({ name: `${employee.first_name} ${employee.last_name}`, id: employee.id });
+    });
+
+    const questions = [
+      {
+        type: "list",
+        name: "employee",
+        message: "Which employee would you like to update?",
+        loop: false,
+        choices: employeesArray.map((employee) => employee.name),
       },
       {
         type: "list",
         name: "manager",
-        message: "Select the employee's new manager: ",
-        choices: employees,
+        message: "Who is the employee's new manager?",
+        loop: false,
+        choices: managersArray.map((manager) => manager.name),
       },
     ];
 
-    inquirer.prompt(questions).then((answers) => {
-      const selectedEmployee = answers.employee.id;
-      const selectedManager = answers.manager.id;
+    const answers = await inquirer.prompt(questions);
+    const selectedEmployee = employeesArray.find(
+      (employee) => employee.name === answers.employee
+    );
 
-      pool.query(
-        "UPDATE employees SET manager_id = ? WHERE id = ?",
-        [selectedManager, selectedEmployee],
-        (err, res) => {
-          if (err) throw err;
-          console.log("Successfully updated employee!");
-          returnPrompt();
-        }
-      );
-    });
-  });
+    const selectedManager = managersArray.find(
+      (manager) => manager.name === answers.manager
+    );
+
+    await pool.query(
+      "UPDATE employees SET manager_id = ? WHERE id = ?",
+      [selectedManager.id, selectedEmployee.id]);
+    console.log("Successfully updated employee!");
+  } catch (err) {
+    console.error("Error occurred while updating the employee:", err);
+  }
 };
 
 module.exports = { updateEmpRole, updateEmpManager };

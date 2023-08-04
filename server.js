@@ -14,6 +14,11 @@ const {
   addNewEmployee,
 } = require("./app/crudHandlers/createQueries");
 
+const {
+  updateEmpRole,
+  updateEmpManager,
+} = require("./app/crudHandlers/updateQueries");
+
 const showMenu = async () => {
   const menu = [
     {
@@ -69,10 +74,10 @@ const showMenu = async () => {
         await addNewEmployee();
         break;
       case "Update Employee Role":
-        await updateEmployee();
+        await updateEmpRole();
         break;
       case "Update Employee Manager":
-        await updateEmployeeManager();
+        await updateEmpManager();
         break;
       case "Delete Department":
         await deleteDepartment();
@@ -87,14 +92,14 @@ const showMenu = async () => {
         await generateLaborCostReport();
         break;
       case "Exit":
-        console.log("Goodbye!");
-        pool.end((err) => {
-          if (err) {
-            console.error("Error closing the database connection:", err);
-          }
+        try {
           process.stdout.write("\x1Bc");
-        });
-        process.exit();
+          await pool.end();
+          console.log("Goodbye!");
+          process.exit();
+        } catch (error) {
+          console.error("Error closing the database connection:", error);
+        }
     }
   } catch (error) {
     console.error("Error showing menu:", error);
