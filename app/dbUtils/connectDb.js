@@ -1,3 +1,4 @@
+//Create connection to database
 const mysql = require("mysql2/promise");
 const { dbConfigCRUD } = require("../config/dbConfig"); 
 

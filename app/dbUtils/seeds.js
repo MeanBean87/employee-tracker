@@ -1,5 +1,6 @@
 const { faker } = require("@faker-js/faker");
 
+//This function will seed the departments table
 const seedDepartments = async (pool) => {
   const departments = [
     { name: "Sales" },
@@ -19,6 +20,7 @@ const seedDepartments = async (pool) => {
   ]);
 };
 
+//This function will seed the roles table
 const seedRoles = async (pool) => {
   const rolesData = [
     // Engineering department
@@ -82,6 +84,7 @@ const seedRoles = async (pool) => {
   ]);
 };
 
+//This function will seed the employees table
 const seedEmployees = async (pool) => {
   const employeesData = [
     // Engineering department

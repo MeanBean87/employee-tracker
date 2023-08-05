@@ -2,11 +2,12 @@ const mysql = require("mysql2");
 const { seedDepartments, seedRoles, seedEmployees } = require("./seeds");
 const { dbConfig } = require("../config/dbConfig.js");
 
-
+//This function will create the departments table
 const createDepartmentsTable = () => {
   return `CREATE TABLE departments (id INT NOT NULL AUTO_INCREMENT, name VARCHAR(30) NOT NULL UNIQUE, PRIMARY KEY (id));`;
 };
 
+//This function will create the roles table
 const createRolesTable = () => {
   return (
     `CREATE TABLE roles (id INT NOT NULL AUTO_INCREMENT,` +
@@ -15,6 +16,7 @@ const createRolesTable = () => {
   );
 };
 
+//This function will create the employees table
 const createEmployeeTable = () => {
   return (
     `CREATE TABLE employees (id INT NOT NULL AUTO_INCREMENT,` +
@@ -24,6 +26,7 @@ const createEmployeeTable = () => {
   );
 };
 
+//This function will build and seed the database
 const buildAndSeedDatabase = async () => {
 
   const pool = mysql

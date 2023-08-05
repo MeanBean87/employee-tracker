@@ -1,3 +1,4 @@
+//Contains the database connection information.
 const userName = "root";
 const password = "password";
 
