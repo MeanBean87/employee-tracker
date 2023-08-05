@@ -1,6 +1,8 @@
 const inquirer = require("inquirer");
 const pool = require("../dbUtils/connectDb");
 
+
+//This function will add a new department to the database
 const addDepartment = async () => {
   try {
     const questions = [
@@ -22,6 +24,7 @@ const addDepartment = async () => {
   }
 };
 
+//This function will add a new role to the database
 const addRole = async () => {
   try {
     const departmentsArray = [];
@@ -71,6 +74,7 @@ const addRole = async () => {
   }
 };
 
+//This function will add a new employee to the database
 const addNewEmployee = async () => {
   try {
     const rolesArray = [];

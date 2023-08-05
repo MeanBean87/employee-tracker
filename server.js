@@ -27,7 +27,7 @@ const {
   deleteEmployees,
 } = require("./app/crudHandlers/deleteQueries");
 
-
+//This function will display the main menu
 const showMenu = async () => {
   const menu = [
     {
@@ -56,6 +56,7 @@ const showMenu = async () => {
     },
   ];
 
+  //This switch statement will call the appropriate function based on the user's selection
   try {
     const answers = await inquirer.prompt(menu);
     switch (answers.menu) {
@@ -114,10 +115,12 @@ const showMenu = async () => {
   } catch (error) {
     console.error("Error showing menu:", error);
   } finally {
+    //This function call will prompt the user to return to the main menu or exit the application
     await promptUser();
   }
 };
 
+//This function will prompt the user to return to the main menu or exit the application
 const promptUser = async () => {
   const questions = [
     {
@@ -139,6 +142,7 @@ const promptUser = async () => {
   }
 };
 
+//This function will call the show menu function and display the title.
 const init = async () => {
   process.stdout.write("\x1B[2J\x1B[0f");
   console.log("\x1b[33m",

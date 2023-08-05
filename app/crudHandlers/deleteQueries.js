@@ -1,6 +1,7 @@
 const inquirer = require("inquirer");
 const pool = require("../dbUtils/connectDb");
 
+//This function will delete a department from the database if it has no employees or roles
 const deleteDepartments = async () => {
   try {
     const validDepartmentsArray = [];
@@ -57,6 +58,7 @@ const deleteDepartments = async () => {
   };
 };
 
+//This function will delete a role from the database if it has no employees
 const deleteRoles = async () => {
   try {
     const validRolesArray = [];
@@ -97,6 +99,7 @@ const deleteRoles = async () => {
   }
 };
 
+//This function will delete an employee from the database
 const deleteEmployees = async () => {
   try {
     const employeesArray = [];

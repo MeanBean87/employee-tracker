@@ -1,6 +1,7 @@
 const inquirer = require("inquirer");
 const pool = require("../dbUtils/connectDb");
 
+//This function will update an employee's role
 const updateEmpRole = async () => {
   try {
     const employeesArray = [];
@@ -54,6 +55,7 @@ const updateEmpRole = async () => {
   }
 };
 
+//This function will update an employee's manager
 const updateEmpManager = async () => {
   try {
     const employeesArray = [];

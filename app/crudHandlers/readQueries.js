@@ -1,12 +1,14 @@
 const cliTable = require("cli-table3");
 const pool = require("../dbUtils/connectDb");
 
+//This function will display a table in the console
 const showTable = (columnArr, tableData) => {
   const table = new cliTable({ head: columnArr });
   table.push(...tableData.map((row) => Object.values(row)));
   console.log(table.toString());
 };
 
+//This function will display all departments in the database
 const viewAllDepartments = async () => {
   try {
     const [departments] = await pool.query(
@@ -19,6 +21,7 @@ const viewAllDepartments = async () => {
   }
 };
 
+//This function will display all roles in the database
 const viewAllRoles = async () => {
   try {
     const [roles] = await pool.query("SELECT * FROM roles ORDER by id");
@@ -29,6 +32,7 @@ const viewAllRoles = async () => {
   }
 };
 
+//This function will display all employees in the database
 const viewAllEmployees = async () => {
   try {
     const [employees] = await pool.query("SELECT * FROM employees ORDER by id");
@@ -42,6 +46,7 @@ const viewAllEmployees = async () => {
   }
 };
 
+//This function will display all employees in the database by manager
 const viewEmployeesByManager = async () => {
   try {
     const query = `
@@ -74,6 +79,7 @@ const viewEmployeesByManager = async () => {
   }
 };
 
+//This function will display all employees in the database by department
 const viewEmployeesByDepartment = async () => {
   try {
     const query = `SELECT 
@@ -109,6 +115,7 @@ const viewEmployeesByDepartment = async () => {
   }
 };
 
+//This function will display a report of the labor cost by department
 const generateLaborCostReport = async () => {
   try {
     const query = `SELECT d.id AS department_id,
